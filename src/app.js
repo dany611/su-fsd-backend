@@ -23,6 +23,7 @@ if (config.env !== 'test') {
 
 // set security HTTP headers
 app.use(helmet());
+app.use('/static', express.static('public'));
 
 // parse json request body
 app.use(express.json());
