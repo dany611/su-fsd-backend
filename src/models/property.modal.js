@@ -136,6 +136,6 @@ propertySchema.plugin(toJSON);
 /**
  * @typedef Property
  */
-const Property = mongoose.model('Property', propertySchemas);
+const Property = mongoose.model('Property', propertySchema);
 
 module.exports = Property;
