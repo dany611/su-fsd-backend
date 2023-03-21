@@ -2,6 +2,7 @@ const express = require('express');
 const authRoute = require('./auth.route');
 const userRoute = require('./user.route');
 const propertyRoute = require('./property.route');
+const eventRoute = require('./event.route');
 const mediaRoute = require('./media.route');
 const docsRoute = require('./docs.route');
 const config = require('../../config/config');
@@ -24,6 +25,10 @@ const defaultRoutes = [
   {
     path: '/media',
     route: mediaRoute,
+  },
+  {
+    path: '/event',
+    route: eventRoute,
   },
 ];
 

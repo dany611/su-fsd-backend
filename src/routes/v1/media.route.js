@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 var upload = require('../../common/upload');
+const { env } = require('../../config/config');
 
 /**
  *
@@ -13,10 +14,10 @@ var upload = require('../../common/upload');
 router.route('/').post((req, res) => {
   upload.upload(req, res, (err) => {
     if (err) {
-        console.log("Error",err)
+      console.log('Error', err);
       res.status(400).send('Something went wrong!');
     }
-    res.send(req.file);
+    res.send({ ...req.file, url: `${process.env.URL}${process.env.PORT}/static/${req.file.originalname}` });
   });
 });
 
