@@ -12,7 +12,7 @@ const createEvent = async (eventBody) => {
 };
 
 const getEventListing = async () => {
-  return Event.find();
+  return Event.find().sort({ createdAt: -1 });
 };
 
 /**
@@ -34,13 +34,33 @@ const deleteEventById = async (eventId) => {
   if (!event) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Event not found');
   }
-  console.log('event', event);
   await event.remove();
   return event;
+};
+
+/**
+ * Update event by id
+ * @param {ObjectId} eventId
+ * @returns {Promise<Event>}
+ */
+const updateEventById = async (eventId, eventBody) => {
+  const event = await getEventById(eventId);
+  if (!event) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Event not found');
+  }
+  await Event.updateOne(
+    {
+      _id: eventId,
+    },
+    {
+      $set: eventBody,
+    }
+  );
 };
 
 module.exports = {
   createEvent,
   deleteEventById,
-  getEventListing
+  getEventListing,
+  updateEventById,
 };

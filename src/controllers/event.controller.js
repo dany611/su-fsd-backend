@@ -17,8 +17,14 @@ const deleteEvent = catchAsync(async (req, res) => {
   res.status(200).json({ message: 'Event successfully deleted' });
 });
 
+const updateEvent = catchAsync(async (req, res) => {
+  await eventService.updateEventById(req.params.eventId, req.body);
+  res.status(200).json({ message: 'Event successfully updated' });
+});
+
 module.exports = {
   createEvent,
   deleteEvent,
   getEventList,
+  updateEvent,
 };
