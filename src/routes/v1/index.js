@@ -4,6 +4,7 @@ const userRoute = require('./user.route');
 const propertyRoute = require('./property.route');
 const eventRoute = require('./event.route');
 const mediaRoute = require('./media.route');
+const interestedUserRoute =require("./interested_user.route")
 const docsRoute = require('./docs.route');
 const config = require('../../config/config');
 
@@ -29,6 +30,10 @@ const defaultRoutes = [
   {
     path: '/event',
     route: eventRoute,
+  },
+  {
+    path: '/interested_user',
+    route: interestedUserRoute,
   },
 ];
 
