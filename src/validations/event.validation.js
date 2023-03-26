@@ -16,7 +16,20 @@ const deleteEventValidation = {
   }),
 };
 
+const updateEventValidation = {
+  params: Joi.object().keys({
+    eventId: Joi.string().custom(objectId),
+  }),
+  body: Joi.object().keys({
+    imageUrl: Joi.string().required(),
+    title: Joi.string().required(),
+    shortDescription: Joi.string().required(),
+    longDescription: Joi.string().required(),
+  }),
+};
+
 module.exports = {
   createNewsEvent,
   deleteEventValidation,
+  updateEventValidation
 };
