@@ -33,11 +33,6 @@ const interestedUserSchema = mongoose.Schema(
       required: true,
       trim: true,
       lowercase: true,
-      validate(value) {
-        if (!validator.isEmail(value)) {
-          throw new Error('Invalid email');
-        }
-      },
     },
   },
   {
