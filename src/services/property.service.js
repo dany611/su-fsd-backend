@@ -50,7 +50,7 @@ const deletePropertyById = async (propertyId, currentUser) => {
   //   throw new ApiError(httpStatus.FORBIDDEN, 'You can only delete your own properties');
   // }
   await property.remove();
-  return {message:"success"};
+  return property;
 };
 
 const updatePropertyById = async (propertyId, updateBody, currentUser) => {
@@ -63,7 +63,7 @@ const updatePropertyById = async (propertyId, updateBody, currentUser) => {
   }
   Object.assign(property, updateBody);
   await property.save();
-  return {"message":"updated"};
+  return property;
 };
 
 module.exports = {
