@@ -55,7 +55,7 @@ const ownerSchema = {
   phone_number: Joi.string(),
 };
 
-const createNewsProperty = {
+const createNewProperty = {
   body: Joi.object().keys({
     sale_type: Joi.number()
       .required()
@@ -91,6 +91,22 @@ const createNewsProperty = {
   }),
 };
 
+const findPropertyListing = {
+  query: Joi.object().keys({
+    limit: Joi.number().integer(),
+    page: Joi.number().integer(),
+    sale_type: Joi.number().valid(...Object.values(propertySaleType)),
+    visible_type: Joi.number().valid(...Object.values(propertyVisibleType)),
+    type: Joi.number().valid(...Object.values(propertyTypes)),
+    country: Joi.string(),
+    reference: Joi.string(),
+    min_price: Joi.number(),
+    max_price: Joi().number(),
+    bedrooms: Joi().number(),
+  }),
+};
+
 module.exports = {
-  createNewsProperty,
+  createNewProperty,
+  findPropertyListing,
 };

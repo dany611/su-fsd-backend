@@ -6,9 +6,9 @@ const propertyController = require('../../controllers/property.controller');
 
 const router = express.Router();
 
-router.route('/').post(auth(), validate(propertyValidation.createNewsProperty), propertyController.createProperty);
+router.route('/').post(auth(), validate(propertyValidation.createNewProperty), propertyController.createProperty);
 
-router.route('/').get(propertyController.getProperties);
+router.route('/').get(validate(propertyValidation.findPropertyListing), propertyController.getProperties);
 
 router.route('/:propertyId').get(propertyController.getProperty);
 

@@ -12,8 +12,8 @@ const createProperty = catchAsync(async (req, res) => {
 });
 
 const getProperties = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['name', 'role']);
-  res.status(200).json({ property: data.property });
+  const result = await propertyService.getProperties(req.query);
+  res.send(result);
 });
 
 const getProperty = catchAsync(async (req, res) => {
