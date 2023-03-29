@@ -74,7 +74,7 @@ const propertySchema = mongoose.Schema(
         type: 'Number',
       },
       year: {
-        type: 'Date',
+        type: 'String',
       },
       reference: {
         type: 'String',
@@ -153,18 +153,7 @@ const propertySchema = mongoose.Schema(
       },
     },
     desc: {
-      es: {
-        type: 'String',
-      },
-      ca: {
-        type: 'String',
-      },
-      en: {
-        type: 'String',
-      },
-      fr: {
-        type: 'String',
-      },
+      type: 'String',
     },
     video_url: {
       type: 'String',
