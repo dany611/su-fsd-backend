@@ -3,7 +3,7 @@ const { objectId } = require('./custom.validation');
 const { propertySaleType, propertyTypes, propertyVisibleType } = require('../config/property');
 
 const agentSchema = Joi.object({
-  full_name: Joi.string(),
+  full_name: Joi.string().allow(''),
 });
 
 const amenitiesSchema = Joi.object({
@@ -11,8 +11,8 @@ const amenitiesSchema = Joi.object({
   plot: Joi.number(),
   beds: Joi.number(),
   baths: Joi.number(),
-  year: Joi.date(),
-  reference: Joi.string(),
+  year: Joi.string().allow('').max(4),
+  reference: Joi.string().allow(''),
   parking: Joi.number(),
   terrace: Joi.number(),
   new_build: Joi.number(),
@@ -20,8 +20,8 @@ const amenitiesSchema = Joi.object({
 });
 
 const energyRatingSchema = Joi.object({
-  consumption: Joi.string(),
-  emissions: Joi.string(),
+  consumption: Joi.string().allow(''),
+  emissions: Joi.string().allow(''),
 });
 
 const notaSimpleSchema = Joi.object({
@@ -49,10 +49,10 @@ const listingAgentSchema = {
 };
 
 const ownerSchema = {
-  name: Joi.string(),
-  email: Joi.string(),
-  surname: Joi.string(),
-  phone_number: Joi.string(),
+  name: Joi.string().allow(''),
+  email: Joi.string().allow(''),
+  surname: Joi.string().allow(''),
+  phone_number: Joi.string().allow(''),
 };
 
 const createNewProperty = {
@@ -67,9 +67,9 @@ const createNewProperty = {
       .required()
       .valid(...Object.values(propertyTypes)),
     country: Joi.string().allow(''),
-    province: Joi.string(),
-    city: Joi.string(),
-    street: Joi.string(),
+    province: Joi.string().allow(''),
+    city: Joi.string().allow(''),
+    street: Joi.string().allow(''),
     latitude: Joi.number().min(-90).max(90),
     longitude: Joi.number().min(-180).max(180),
     agent: agentSchema,
@@ -80,20 +80,20 @@ const createNewProperty = {
     for_rent: forRentSchema,
     listing_agent: listingAgentSchema,
     selling_agent: listingAgentSchema,
-    desc: Joi.string(),
-    video_url: Joi.string(),
-    images: Joi.array().items(Joi.string()),
-    documents: Joi.array().items(Joi.string()),
-    catastral: Joi.string(),
-    address: Joi.string(),
-    postal_code: Joi.string(),
+    desc: Joi.string().allow(''),
+    video_url: Joi.string().allow(''),
+    images: Joi.array().items(Joi.string().allow('')),
+    documents: Joi.array().items(Joi.string().allow('')),
+    catastral: Joi.string().allow(''),
+    address: Joi.string().allow(''),
+    postal_code: Joi.string().allow(''),
     owner: ownerSchema,
   }),
 };
 
 const updateProperty = {
   params: Joi.object().keys({
-    propertyId: Joi.string().custom(objectId),
+    propertyId: Joi.string().allow('').custom(objectId),
   }),
   body: Joi.object().keys({
     sale_type: Joi.number()
@@ -106,9 +106,9 @@ const updateProperty = {
       .required()
       .valid(...Object.values(propertyTypes)),
     country: Joi.string().allow(''),
-    province: Joi.string(),
-    city: Joi.string(),
-    street: Joi.string(),
+    province: Joi.string().allow(''),
+    city: Joi.string().allow(''),
+    street: Joi.string().allow(''),
     latitude: Joi.number().min(-90).max(90),
     longitude: Joi.number().min(-180).max(180),
     agent: agentSchema,
@@ -119,13 +119,13 @@ const updateProperty = {
     for_rent: forRentSchema,
     listing_agent: listingAgentSchema,
     selling_agent: listingAgentSchema,
-    desc: Joi.string(),
-    video_url: Joi.string(),
-    images: Joi.array().items(Joi.string()),
-    documents: Joi.array().items(Joi.string()),
-    catastral: Joi.string(),
-    address: Joi.string(),
-    postal_code: Joi.string(),
+    desc: Joi.string().allow(''),
+    video_url: Joi.string().allow(''),
+    images: Joi.array().items(Joi.string().allow('')),
+    documents: Joi.array().items(Joi.string().allow('')),
+    catastral: Joi.string().allow(''),
+    address: Joi.string().allow(''),
+    postal_code: Joi.string().allow(''),
     owner: ownerSchema,
   }),
 };
@@ -137,8 +137,8 @@ const findPropertyListing = {
     sale_type: Joi.number().valid(...Object.values(propertySaleType)),
     visible_type: Joi.number().valid(...Object.values(propertyVisibleType)),
     type: Joi.number().valid(...Object.values(propertyTypes)),
-    country: Joi.string(),
-    reference: Joi.string(),
+    country: Joi.string().allow(''),
+    reference: Joi.string().allow(''),
     min_price: Joi.number(),
     max_price: Joi.number(),
     bedrooms: Joi.number(),
@@ -147,13 +147,13 @@ const findPropertyListing = {
 
 const getProperty = {
   params: Joi.object().keys({
-    propertyId: Joi.string().custom(objectId),
+    propertyId: Joi.string().allow('').custom(objectId),
   }),
 };
 
 const deleteUser = {
   params: Joi.object().keys({
-    propertyId: Joi.string().custom(objectId),
+    propertyId: Joi.string().allow('').custom(objectId),
   }),
 };
 

@@ -17,7 +17,7 @@ router.route('/').post((req, res) => {
       console.log('Error', err);
       res.status(400).send('Something went wrong!');
     }
-    res.send({ ...req.file, url: `${process.env.URL}${process.env.PORT}/static/${req.file.originalname}` });
+    res.send({ ...req.file, url: `${process.env.URL}/static/${req.file.originalname}` });
   });
 });
 
