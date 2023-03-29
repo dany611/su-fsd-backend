@@ -37,7 +37,25 @@ const getProperties = async (params) => {
   return { property, totalProperties };
 };
 
+const getPropertyById = async (id) => {
+  return Property.findById(id);
+};
+
+const deletePropertyById = async (propertyId, currentUser) => {
+  const property = await getPropertyById(propertyId);
+  if (!property) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Property not found');
+  }
+  if (currentUser.id !== property.user.id) {
+    throw new ApiError(httpStatus.FORBIDDEN, 'You can only delete your own properties');
+  }
+  await property.remove();
+  return property;
+};
+
 module.exports = {
   createProperty,
   getProperties,
+  getPropertyById,
+  deletePropertyById
 };

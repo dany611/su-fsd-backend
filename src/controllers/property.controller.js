@@ -17,12 +17,21 @@ const getProperties = catchAsync(async (req, res) => {
 });
 
 const getProperty = catchAsync(async (req, res) => {
-  const property = data.property.find((item) => item.id == req.params.propertyId);
+  const property = await propertyService.getPropertyById(req.params.propertyId);
+  if (!property) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Property not found');
+  }
   res.status(200).json({ property });
+});
+
+const deleteProperty = catchAsync(async (req, res) => {
+  await propertyService.deletePropertyById(req.params.propertyId);
+  res.status(httpStatus.NO_CONTENT).send();
 });
 
 module.exports = {
   createProperty,
   getProperties,
   getProperty,
+  deleteProperty,
 };

@@ -10,6 +10,7 @@ router.route('/').post(auth(), validate(propertyValidation.createNewProperty), p
 
 router.route('/').get(validate(propertyValidation.findPropertyListing), propertyController.getProperties);
 
-router.route('/:propertyId').get(propertyController.getProperty);
+router.route('/:propertyId').get(validate(propertyValidation.getProperty), propertyController.getProperty);
+router.route('/:propertyId').delete(validate(propertyValidation.deleteUser), propertyController.deleteProperty);
 
 module.exports = router;

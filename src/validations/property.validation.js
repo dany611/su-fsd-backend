@@ -106,7 +106,21 @@ const findPropertyListing = {
   }),
 };
 
+const getProperty = {
+  params: Joi.object().keys({
+    propertyId: Joi.string().custom(objectId),
+  }),
+};
+
+const deleteUser = {
+  params: Joi.object().keys({
+    propertyId: Joi.string().custom(objectId),
+  }),
+};
+
 module.exports = {
   createNewProperty,
   findPropertyListing,
+  getProperty,
+  deleteUser,
 };
