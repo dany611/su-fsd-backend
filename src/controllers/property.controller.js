@@ -25,8 +25,13 @@ const getProperty = catchAsync(async (req, res) => {
 });
 
 const deleteProperty = catchAsync(async (req, res) => {
-  await propertyService.deletePropertyById(req.params.propertyId);
+  await propertyService.deletePropertyById(req.params.propertyId, req.user);
   res.status(httpStatus.NO_CONTENT).send();
+});
+
+const updateProperty = catchAsync(async (req, res) => {
+  const property = await propertyService.updatePropertyById(req.params.propertyId, req.body, req.user);
+  res.send(property);
 });
 
 module.exports = {
@@ -34,4 +39,5 @@ module.exports = {
   getProperties,
   getProperty,
   deleteProperty,
+  updateProperty,
 };

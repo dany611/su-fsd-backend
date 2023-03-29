@@ -91,6 +91,45 @@ const createNewProperty = {
   }),
 };
 
+const updateProperty = {
+  params: Joi.object().keys({
+    propertyId: Joi.string().custom(objectId),
+  }),
+  body: Joi.object().keys({
+    sale_type: Joi.number()
+      .required()
+      .valid(...Object.values(propertySaleType)),
+    visible_type: Joi.number()
+      .required()
+      .valid(...Object.values(propertyVisibleType)),
+    type: Joi.number()
+      .required()
+      .valid(...Object.values(propertyTypes)),
+    country: Joi.string().allow(''),
+    province: Joi.string(),
+    city: Joi.string(),
+    street: Joi.string(),
+    latitude: Joi.number().min(-90).max(90),
+    longitude: Joi.number().min(-180).max(180),
+    agent: agentSchema,
+    amenities: amenitiesSchema,
+    energy_rating: energyRatingSchema,
+    nota_simple: notaSimpleSchema,
+    for_sale: forSaleSchema,
+    for_rent: forRentSchema,
+    listing_agent: listingAgentSchema,
+    selling_agent: listingAgentSchema,
+    desc: Joi.string(),
+    video_url: Joi.string(),
+    images: Joi.array().items(Joi.string()),
+    documents: Joi.array().items(Joi.string()),
+    catastral: Joi.string(),
+    address: Joi.string(),
+    postal_code: Joi.string(),
+    owner: ownerSchema,
+  }),
+};
+
 const findPropertyListing = {
   query: Joi.object().keys({
     limit: Joi.number().integer(),
@@ -123,4 +162,5 @@ module.exports = {
   findPropertyListing,
   getProperty,
   deleteUser,
+  updateProperty,
 };
