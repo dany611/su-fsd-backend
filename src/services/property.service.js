@@ -46,9 +46,9 @@ const deletePropertyById = async (propertyId, currentUser) => {
   if (!property) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Property not found');
   }
-  // if (currentUser.id !== property.user.id) {
-  //   throw new ApiError(httpStatus.FORBIDDEN, 'You can only delete your own properties');
-  // }
+  if (currentUser.id !== property.user.toString()) {
+    throw new ApiError(httpStatus.FORBIDDEN, 'You can only delete your own properties');
+  }
   await property.remove();
   return property;
 };
@@ -58,7 +58,7 @@ const updatePropertyById = async (propertyId, updateBody, currentUser) => {
   if (!property) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Property not found');
   }
-  if (currentUser.id !== property.user.id) {
+  if (currentUser.id !== property.user.toString()) {
     throw new ApiError(httpStatus.FORBIDDEN, 'You can only edit your own properties');
   }
   Object.assign(property, updateBody);
