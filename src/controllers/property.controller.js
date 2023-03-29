@@ -26,7 +26,7 @@ const getProperty = catchAsync(async (req, res) => {
 
 const deleteProperty = catchAsync(async (req, res) => {
   await propertyService.deletePropertyById(req.params.propertyId, req.user);
-  res.status(httpStatus.NO_CONTENT).json({message:"deleted"});
+  return res.json({message:"deleted"}).status(httpStatus.NO_CONTENT)
 });
 
 const updateProperty = catchAsync(async (req, res) => {
