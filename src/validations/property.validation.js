@@ -140,8 +140,8 @@ const findPropertyListing = {
     country: Joi.string(),
     reference: Joi.string(),
     min_price: Joi.number(),
-    max_price: Joi().number(),
-    bedrooms: Joi().number(),
+    max_price: Joi.number(),
+    bedrooms: Joi.number(),
   }),
 };
 
