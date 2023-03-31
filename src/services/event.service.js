@@ -5,7 +5,7 @@ const ApiError = require('../utils/ApiError');
 /**
  * Create a NewsEvent
  * @param {Object} eventBody
- * @returns {Promise<User>}
+ * @returns {Promise<Event>}
  */
 const createEvent = async (eventBody) => {
   return Event.create(eventBody);
