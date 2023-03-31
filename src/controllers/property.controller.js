@@ -34,10 +34,16 @@ const updateProperty = catchAsync(async (req, res) => {
   res.send(property);
 });
 
+const getPropertyAnalytics= catchAsync(async (req, res) => {
+  const result = await propertyService.getPropertyAnalytics();
+  res.json(result);
+});
+
 module.exports = {
   createProperty,
   getProperties,
   getProperty,
   deleteProperty,
   updateProperty,
+  getPropertyAnalytics
 };

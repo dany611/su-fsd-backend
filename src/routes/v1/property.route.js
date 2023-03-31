@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.route('/').post(auth(), validate(propertyValidation.createNewProperty), propertyController.createProperty);
 router.route('/').get(validate(propertyValidation.findPropertyListing), propertyController.getProperties);
-
+router.route('/analytics').get(auth(), propertyController.getPropertyAnalytics);
 router.route('/:propertyId').get(validate(propertyValidation.getProperty), propertyController.getProperty);
 router.route('/:propertyId').delete(auth(), validate(propertyValidation.deleteUser), propertyController.deleteProperty);
 router.route('/:propertyId').put(auth(), validate(propertyValidation.updateProperty), propertyController.updateProperty);
