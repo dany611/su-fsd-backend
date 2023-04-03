@@ -1,10 +1,15 @@
 const httpStatus = require('http-status');
+const { propertySoldStatus } = require('../config/property');
 const { Property } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 const createProperty = async (eventBody, currentUser) => {
   const property = new Property(eventBody);
+  property.sold_status = propertySoldStatus.UnSold;
   property.user = currentUser;
+  if (!eventBody.owner) {
+    property.owner = currentUser;
+  }
   return property.save();
 };
 

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { toJSON } = require('./plugins');
 const { tokenTypes } = require('../config/tokens');
-const { propertySaleType, propertyTypes, propertyVisibleType } = require('../config/property');
+const { propertySaleType, propertyTypes, propertyVisibleType, propertySoldStatus } = require('../config/property');
 
 /**
  * properties that will be mapped to our schema from the xml json defined here.
@@ -34,6 +34,10 @@ const propertySchema = mongoose.Schema(
     type: {
       type: 'Number',
       enum: propertyTypes,
+    },
+    sold_status: {
+      type: 'Number',
+      enum: propertySoldStatus,
     },
     country: {
       type: 'String',
