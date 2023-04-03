@@ -1,6 +1,5 @@
 const httpStatus = require('http-status');
 const { propertySoldStatus,propertySaleType, propertyVisibleType, propertyTypes } = require('../config/property');
-const { propertySoldStatus } = require('../config/property');
 const { Property } = require('../models');
 const ApiError = require('../utils/ApiError');
 
