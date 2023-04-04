@@ -63,4 +63,5 @@ module.exports = {
   deleteEventById,
   getEventListing,
   updateEventById,
+  getEventById,
 };

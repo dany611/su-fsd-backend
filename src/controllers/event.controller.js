@@ -12,6 +12,11 @@ const getEventList = catchAsync(async (req, res) => {
   res.status(200).json({ event });
 });
 
+const getEventById = catchAsync(async (req, res) => {
+  const event = await eventService.getEventById(req.params.eventId);
+  res.status(200).json({ event });
+});
+
 const deleteEvent = catchAsync(async (req, res) => {
   await eventService.deleteEventById(req.params.eventId);
   res.status(200).json({ message: 'Event successfully deleted' });
@@ -27,4 +32,5 @@ module.exports = {
   deleteEvent,
   getEventList,
   updateEvent,
+  getEventById,
 };
