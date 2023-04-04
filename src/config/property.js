@@ -20,8 +20,14 @@ const propertyVisibleType = {
   ShowPortals: 3,
 };
 
+const propertySoldStatus = {
+  Sold: 1,
+  UnSold: 2,
+};
+
 module.exports = {
   propertyTypes,
   propertySaleType,
   propertyVisibleType,
+  propertySoldStatus,
 };

@@ -1,10 +1,15 @@
 const httpStatus = require('http-status');
+const { propertySoldStatus,propertySaleType, propertyVisibleType, propertyTypes } = require('../config/property');
 const { Property } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 const createProperty = async (eventBody, currentUser) => {
   const property = new Property(eventBody);
+  property.sold_status = propertySoldStatus.UnSold;
   property.user = currentUser;
+  if (!eventBody.owner) {
+    property.owner = currentUser;
+  }
   return property.save();
 };
 
@@ -41,6 +46,42 @@ const getPropertyById = async (id) => {
   return Property.findById(id);
 };
 
+const getPropertyAnalytics=async ()=>{
+  let totalProperties=await Property.count({});
+  let totalRentProperties=await Property.count({sale_type:propertySaleType.Rent});
+  let totalSaleProperties=await Property.count({sale_type:propertySaleType.Sale});
+  let totalAvailableProperties=await Property.count({visible_type:propertyVisibleType.Available});
+  let totalPropertiesOnPortal=await Property.count({visible_type:propertyVisibleType.ShowPortals});
+  let totalFeaturedProperties=await Property.count({visible_type:propertyVisibleType.Featured});
+  let totalShopProperties=await Property.count({type:propertyTypes.Shop});
+  let totalVillaProperties=await Property.count({type:propertyTypes.Villa});
+  let totalPlotProperties=await Property.count({type:propertyTypes.Plot});
+  let totalMasiaProperties=await Property.count({type:propertyTypes.Masia});
+  let totalAppartmentProperties=await Property.count({type:propertyTypes.Apartment});
+  let totalHotelProperties=await Property.count({type:propertyTypes.Hotel});
+  let totalSemiDetachedProperties=await Property.count({type:propertyTypes.SemiDetached});
+  let totalResturantProperties=await Property.count({type:propertyTypes.Restaurant});
+
+  return {
+    totalProperties,
+    totalAvailableProperties,
+    totalRentProperties,
+    totalPlotProperties,
+    totalAppartmentProperties,
+    totalAppartmentProperties,
+    totalAvailableProperties,
+    totalHotelProperties,
+    totalSaleProperties,
+    totalSemiDetachedProperties,
+    totalPropertiesOnPortal,
+    totalFeaturedProperties,
+    totalShopProperties,
+    totalVillaProperties,
+    totalMasiaProperties,
+    totalResturantProperties
+  }
+}
+
 const deletePropertyById = async (propertyId, currentUser) => {
   const property = await getPropertyById(propertyId);
   if (!property) {
@@ -72,4 +113,5 @@ module.exports = {
   getPropertyById,
   deletePropertyById,
   updatePropertyById,
+  getPropertyAnalytics
 };
