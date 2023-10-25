@@ -11,7 +11,7 @@ const moment =  require('moment');
 const getFileList = (sortColumn,sortDirection) => {
 
     // read a file 
-    const data = fs.readFileSync('../../test-data.csv', 'utf8');
+    const data = fs.readFileSync('./test-data.csv', 'utf8');
     
     // split the data by new line
     const dataArr = data.split('\n');
